@@ -285,28 +285,28 @@ export default function ResourcePage() {
                 {filteredResources.map((res: Resource) => (
                   <TableRow key={res.id}>
                     <TableCell className="w-32 px-8 py-4">{res.id}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.title}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.author}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.platform}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.title}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.author}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.platform}</TableCell>
                     <TableCell className="w-48 px-8 py-4">
-                      {res.image ? (
+                      {res.image && res.image.startsWith("http") ? (
                         <Image src={res.image} alt={res.title} width={48} height={48} className="w-12 h-12 object-contain" />
                       ) : (
                         <span className="text-gray-400">-</span>
                       )}
                     </TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.overview}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{getCategoryName(res.category_id)}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.compatibility}</TableCell>
-                    <TableCell className="w-56 px-8 py-4">{res.description}</TableCell>
-                    <TableCell className="w-40 px-8 py-4">
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.overview}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{getCategoryName(res.category_id)}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.compatibility}</TableCell>
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.description}</TableCell>
+                    <TableCell className="w-40 px-8 py-4 truncate overflow-hidden whitespace-nowrap">
                       {res.is_active ? (
                         <span className="text-green-600 font-semibold">Active</span>
                       ) : (
                         <span className="text-red-500 font-semibold">Inactive</span>
                       )}
                     </TableCell>
-                    <TableCell className="w-64 px-8 py-4">{res.created_at}</TableCell>
+                    <TableCell className="w-64 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.created_at}</TableCell>
                     <TableCell className="w-40 px-8 py-4">
                       <button type="button" className="text-blue-500 hover:underline mr-2" onClick={() => handleEdit(res)}>Edit</button>
                       <button type="button" className="text-red-500 hover:underline" onClick={() => handleDelete(res.id)}>Delete</button>

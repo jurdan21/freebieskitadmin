@@ -15,10 +15,10 @@ export default function UserDropdown() {
     }
   }, []);
 
-  function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.stopPropagation();
-    setIsOpen((prev) => !prev);
-  }
+function toggleDropdown(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  e.stopPropagation();
+  setIsOpen((prev) => !prev);
+}
 
   function closeDropdown() {
     setIsOpen(false);
@@ -32,7 +32,7 @@ export default function UserDropdown() {
   return (
     <div className="relative">
       <button
-        onClick={toggleDropdown}
+        onClick={toggleDropdown} 
         className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle"
       >
         <span className="block mr-1 font-medium text-theme-sm">{user?.name || "User"}</span>
