@@ -148,11 +148,11 @@ export default function MasterCategoriesPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label>Name</Label>
-            <Input name="name" value={form.name} onChange={handleChange} required />
+            <input name="name" value={form.name} onChange={handleChange} required className="w-full border rounded-lg px-3 py-2" />
           </div>
           <div>
             <Label>Slug</Label>
-            <Input name="slug" value={form.slug} onChange={handleChange} required />
+            <input name="slug" value={form.slug} onChange={handleChange} required className="w-full border rounded-lg px-3 py-2" />
           </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" name="is_active" checked={form.is_active} onChange={handleChange} id="is_active" />

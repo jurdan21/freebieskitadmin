@@ -47,7 +47,7 @@ import BoxCubeIcon from "./box-cube.svg";
 import PlugInIcon from "./plug-in.svg";
 import DocsIcon from "./docs.svg";
 import MailIcon from "./mail-line.svg";
-import HorizontaLDots from "./horizontal-dots.svg";
+import HorizontalDots from "./horizontal-dots.svg";
 import ChatIcon from "./chat.svg";
 import MoreDotIcon from "./more-dot.svg";
 import BellIcon from "./bell.svg";
@@ -103,7 +103,7 @@ export {
   PlugInIcon,
   DocsIcon,
   MailIcon,
-  HorizontaLDots,
+  HorizontalDots,
   ChevronUpIcon,
   ChatIcon,
 };
