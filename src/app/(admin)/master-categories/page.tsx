@@ -159,7 +159,7 @@ export default function MasterCategoriesPage() {
           </div>
           {error && <div className="text-red-500 text-sm">{error}</div>}
           <div className="flex justify-end gap-2">
-            <Button size="sm" variant="outline" onClick={handleCancel} type="button">Cancel</Button>
+            <Button size="sm" variant="outline" onClick={handleCancel}>Cancel</Button>
             <Button size="sm" type="submit" disabled={loading}>{loading ? "Saving..." : "Save"}</Button>
           </div>
         </form>
