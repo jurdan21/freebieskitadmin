@@ -7,6 +7,7 @@ import { useSidebar } from "../context/SidebarContext";
 import {
   ChevronDownIcon,
   TableIcon,
+  HorizontalDots,
 } from "../icons/index";
 
 type NavItem = {
@@ -290,7 +291,7 @@ const AppSidebar: React.FC = () => {
                 {isExpanded || isHovered || isMobileOpen ? (
                   "Menu"
                 ) : (
-                  <HorizontaLDots />
+                  <HorizontalDots />
                 )}
               </h2>
               {renderMenuItems(navItems, "main")}
@@ -307,7 +308,7 @@ const AppSidebar: React.FC = () => {
                 {isExpanded || isHovered || isMobileOpen ? (
                   "Others"
                 ) : (
-                  <HorizontaLDots />
+                  <HorizontalDots />
                 )}
               </h2>
               {renderMenuItems(othersItems, "others")}
