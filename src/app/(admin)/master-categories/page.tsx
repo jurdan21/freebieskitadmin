@@ -3,7 +3,6 @@ import { Table, TableHeader, TableBody, TableRow, TableCell } from "@/components
 import React, { useState, useEffect } from "react";
 import Button from "@/components/ui/button/Button";
 import { Modal } from "@/components/ui/modal";
-import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
 import { useModal } from "@/hooks/useModal";
 import { supabase } from "@/lib/supabaseClient";
