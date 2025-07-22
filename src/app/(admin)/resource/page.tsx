@@ -20,6 +20,7 @@ interface Resource {
   description: string;
   is_active: boolean;
   created_at: string;
+  download_link?: string; // Tambah field ini
 }
 interface Category {
   id: number;
@@ -42,6 +43,7 @@ export default function ResourcePage() {
     compatibility: "",
     description: "",
     is_active: true,
+    download_link: "", // Tambah field ini
   });
   const [editId, setEditId] = useState<number | null>(null);
   const { keyword } = useSearch();
@@ -56,7 +58,7 @@ export default function ResourcePage() {
     setError(null);
     const { data: resourcesData, error: resError } = await supabase
       .from("resources")
-      .select("id, title, author, platform, image, overview, category_id, compatibility, description, is_active, created_at");
+      .select("id, title, author, platform, image, overview, category_id, compatibility, description, is_active, created_at, download_link"); // Tambah download_link
     const { data: categoriesData, error: catError } = await supabase
       .from("categories")
       .select("id, name");
@@ -92,6 +94,7 @@ export default function ResourcePage() {
       compatibility: "",
       description: "",
       is_active: true,
+      download_link: "", // Tambah field ini
     });
     setEditId(null);
     setIsModalOpen(true);
@@ -108,6 +111,7 @@ export default function ResourcePage() {
       compatibility: res.compatibility || "",
       description: res.description || "",
       is_active: res.is_active,
+      download_link: res.download_link || "", // Tambah field ini
     });
     setEditId(res.id);
     setIsModalOpen(true);
@@ -134,6 +138,7 @@ export default function ResourcePage() {
       compatibility: "",
       description: "",
       is_active: true,
+      download_link: "", // Tambah field ini
     });
     setEditId(null);
     setIsModalOpen(false);
@@ -168,6 +173,7 @@ export default function ResourcePage() {
       compatibility: "",
       description: "",
       is_active: true,
+      download_link: "", // Tambah field ini
     });
     setEditId(null);
     await fetchData();
@@ -246,6 +252,11 @@ export default function ResourcePage() {
             <Label>Description</Label>
             <textarea name="description" value={String(form.description)} onChange={handleChange} className="w-full border rounded-lg px-3 py-2" rows={3} />
           </div>
+          {/* Tambahkan input download_link */}
+          <div>
+            <Label>Download Link</Label>
+            <input name="download_link" value={String(form.download_link)} onChange={handleChange} className="w-full border rounded-lg px-3 py-2" placeholder="https://..." />
+          </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" name="is_active" checked={form.is_active} onChange={handleChange} id="is_active" />
             <Label htmlFor="is_active">Active</Label>
@@ -264,7 +275,7 @@ export default function ResourcePage() {
         <div className="py-8 text-center text-red-500">{error}</div>
       ) : (
         <div className="overflow-x-auto w-full">
-          <Table className="table-fixed w-full min-w-[1600px]">
+          <Table className="table-fixed w-full min-w-[1700px]">
               <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
                 <TableRow>
                   <TableCell isHeader className="w-32 px-8 py-4 font-medium text-gray-500 text-start">ID</TableCell>
@@ -276,6 +287,7 @@ export default function ResourcePage() {
                   <TableCell isHeader className="w-56 px-8 py-4 font-medium text-gray-500 text-start">Category</TableCell>
                   <TableCell isHeader className="w-56 px-8 py-4 font-medium text-gray-500 text-start">Compatibility</TableCell>
                   <TableCell isHeader className="w-56 px-8 py-4 font-medium text-gray-500 text-start">Description</TableCell>
+                  <TableCell isHeader className="w-56 px-8 py-4 font-medium text-gray-500 text-start">Download Link</TableCell>
                   <TableCell isHeader className="w-40 px-8 py-4 font-medium text-gray-500 text-start">Is Active</TableCell>
                   <TableCell isHeader className="w-64 px-8 py-4 font-medium text-gray-500 text-start">Created At</TableCell>
                   <TableCell isHeader className="w-40 px-8 py-4 font-medium text-gray-500 text-start">Actions</TableCell>
@@ -299,6 +311,14 @@ export default function ResourcePage() {
                     <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{getCategoryName(res.category_id)}</TableCell>
                     <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.compatibility}</TableCell>
                     <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">{res.description}</TableCell>
+                    {/* Kolom Download Link */}
+                    <TableCell className="w-56 px-8 py-4 truncate overflow-hidden whitespace-nowrap">
+                      {res.download_link ? (
+                        <a href={res.download_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Download</a>
+                      ) : (
+                        <span className="text-gray-400">-</span>
+                      )}
+                    </TableCell>
                     <TableCell className="w-40 px-8 py-4 truncate overflow-hidden whitespace-nowrap">
                       {res.is_active ? (
                         <span className="text-green-600 font-semibold">Active</span>
