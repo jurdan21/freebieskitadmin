@@ -6,6 +6,7 @@ import Button from "@/components/ui/button/Button";
 import { Modal } from "@/components/ui/modal";
 import Label from "@/components/form/Label";
 import { useSearch } from '@/context/SearchContext';
+import Image from 'next/image';
 
 interface Resource {
   id: number;
@@ -288,7 +289,11 @@ export default function ResourcePage() {
                     <TableCell className="w-56 px-8 py-4">{res.author}</TableCell>
                     <TableCell className="w-56 px-8 py-4">{res.platform}</TableCell>
                     <TableCell className="w-48 px-8 py-4">
-                      {res.image ? <img src={res.image} alt={res.title} className="w-12 h-12 object-contain" /> : <span className="text-gray-400">-</span>}
+                      {res.image ? (
+                        <Image src={res.image} alt={res.title} width={48} height={48} className="w-12 h-12 object-contain" />
+                      ) : (
+                        <span className="text-gray-400">-</span>
+                      )}
                     </TableCell>
                     <TableCell className="w-56 px-8 py-4">{res.overview}</TableCell>
                     <TableCell className="w-56 px-8 py-4">{getCategoryName(res.category_id)}</TableCell>

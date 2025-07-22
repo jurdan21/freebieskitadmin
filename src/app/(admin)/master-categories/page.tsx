@@ -9,10 +9,18 @@ import { useModal } from "@/hooks/useModal";
 import { supabase } from "@/lib/supabaseClient";
 import { useSearch } from '@/context/SearchContext';
 
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  is_active: boolean;
+  created_at: string;
+}
+
 export default function MasterCategoriesPage() {
   const { isOpen, openModal, closeModal } = useModal();
   const [form, setForm] = useState({ name: "", slug: "", is_active: true });
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editId, setEditId] = useState<number | null>(null);
@@ -44,7 +52,7 @@ export default function MasterCategoriesPage() {
   };
 
   // Open modal for edit
-  const handleEdit = (cat: any) => {
+  const handleEdit = (cat: Category) => {
     setForm({ name: cat.name, slug: cat.slug, is_active: cat.is_active });
     setEditId(cat.id);
     openModal();

@@ -46,4 +46,6 @@ const AppHeader: React.FC = () => {
       </div>
     </header>
   );
-} 
+}
+
+export default AppHeader; 

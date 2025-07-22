@@ -22,7 +22,7 @@ export default function AdminLayout({
         router.replace("/login");
       }
     }
-  }, []);
+  }, [router]);
 
   // Dynamic class for main content margin based on sidebar state
   const mainContentMargin = isMobileOpen
