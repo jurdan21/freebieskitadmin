@@ -234,7 +234,7 @@ export default function ResourcePage() {
           </div>
           <div>
             <Label>Overview</Label>
-            <input name="overview" value={String(form.overview)} onChange={handleChange} className="w-full border rounded-lg px-3 py-2" />
+            <textarea name="overview" value={String(form.overview)} onChange={handleChange} className="w-full border rounded-lg px-3 py-2" rows={3} />
           </div>
           <div>
             <Label>Category</Label>
