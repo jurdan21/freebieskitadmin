@@ -2,18 +2,28 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import ClientCaptcha from "react-client-captcha";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState("");
+  const [captchaInput, setCaptchaInput] = useState("");
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    // Validasi captcha
+    if (captchaInput !== captcha) {
+      setError("Captcha salah. Silakan coba lagi.");
+      setLoading(false);
+      return;
+    }
     // Query user by email
     const { data: users, error: supaError } = await supabase
       .from("users")
@@ -71,6 +81,20 @@ export default function LoginPage() {
             onChange={e => setPassword(e.target.value)}
             required
           />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Captcha</label>
+          <div className="flex items-center gap-2">
+            <ClientCaptcha captchaCode={code => setCaptcha(code)} />
+            <input
+              type="text"
+              className="w-full border rounded-lg px-3 py-2"
+              value={captchaInput}
+              onChange={e => setCaptchaInput(e.target.value)}
+              required
+              placeholder="Masukkan captcha di atas"
+            />
+          </div>
         </div>
         {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
         <button
