@@ -8,7 +8,7 @@ export default function HomeRedirect() {
     if (typeof window !== "undefined") {
       const user = localStorage.getItem("user");
       if (user) {
-        router.replace("/master-categories");
+        router.replace("/admin/master-categories");
       } else {
         router.replace("/login");
       }

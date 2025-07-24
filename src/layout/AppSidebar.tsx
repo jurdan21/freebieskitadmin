@@ -21,12 +21,12 @@ const navItems: NavItem[] = [
   {
     icon: <TableIcon />,
     name: "Master Categories",
-    path: "/master-categories",
+    path: "/admin/master-categories",
   },
   {
     icon: <TableIcon />,
     name: "Resource",
-    path: "/resource",
+    path: "/admin/resource",
   },
 ];
 

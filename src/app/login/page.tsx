@@ -56,7 +56,7 @@ export default function LoginPage() {
     }
     localStorage.setItem("user", JSON.stringify({ id: user.id, email: user.email, name: user.name, role: user.role }));
     setLoading(false);
-    router.push("/master-categories");
+    router.push("/admin/master-categories");
   };
 
   return (
