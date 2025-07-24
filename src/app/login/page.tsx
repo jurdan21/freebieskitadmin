@@ -1,25 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
-import ClientCaptcha from "react-client-captcha";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [captcha, setCaptcha] = useState("");
-  const [captchaInput, setCaptchaInput] = useState("");
-
+  const captchaInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     // Validasi captcha
-    if (captchaInput !== captcha) {
+    const userCaptcha = captchaInputRef.current?.value || "";
+    if (!validateCaptcha(userCaptcha)) {
       setError("Captcha salah. Silakan coba lagi.");
       setLoading(false);
       return;
@@ -46,13 +49,11 @@ export default function LoginPage() {
       setLoading(false);
       return;
     }
-    // For demo: plain text password check (should hash in production!)
     if (user.password !== password) {
       setError("Incorrect password.");
       setLoading(false);
       return;
     }
-    // Save session (for demo: localStorage)
     localStorage.setItem("user", JSON.stringify({ id: user.id, email: user.email, name: user.name, role: user.role }));
     setLoading(false);
     router.push("/master-categories");
@@ -84,13 +85,12 @@ export default function LoginPage() {
         </div>
         <div className="mb-4">
           <label className="block mb-1 font-medium">Captcha</label>
-          <div className="flex items-center gap-2">
-            <ClientCaptcha captchaCode={code => setCaptcha(code)} />
+          <div className="flex flex-col gap-2">
+            <LoadCanvasTemplate />
             <input
               type="text"
               className="w-full border rounded-lg px-3 py-2"
-              value={captchaInput}
-              onChange={e => setCaptchaInput(e.target.value)}
+              ref={captchaInputRef}
               required
               placeholder="Masukkan captcha di atas"
             />
